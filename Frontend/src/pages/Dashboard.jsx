@@ -24,6 +24,20 @@ const Dashboard = () => {
         billed_energy: Math.floor(Math.random() * 300) + 900,
       };
 
+      fetch("http://127.0.0.1:8000/detect", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(newEntry),
+})
+  .then((res) => res.json())
+  .then((res) => {
+  
+})
+  
+  .catch((err) => console.error(err));
+
       const loss = newEntry.input_energy - newEntry.billed_energy;
       const lossPercent = ((loss / newEntry.input_energy) * 100).toFixed(2);
 
