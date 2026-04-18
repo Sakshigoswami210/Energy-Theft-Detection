@@ -1,11 +1,12 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
+sys.path.insert(0, BASE_DIR)
+from ai_model.model import run_model
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
-from ai_model.model import run_model
 
 client = MongoClient("mongodb://localhost:27017/")
 db = client["energy_db"]
