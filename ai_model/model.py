@@ -41,4 +41,9 @@ def run_model(file_path):
     # Return only anomalies
     anomalies = df_melted[df_melted['anomaly'] == -1]
 
-    return anomalies.to_dict(orient="records")
+return anomalies[[
+    'Region',
+    'Month',
+    'Consumption',
+    'Consumer Category'
+]].to_dict(orient="records")
