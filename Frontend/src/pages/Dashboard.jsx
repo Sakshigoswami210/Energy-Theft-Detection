@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
@@ -13,6 +14,16 @@ const Dashboard = () => {
   const [data, setData] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [prediction, setPrediction] = useState(null);
+
+  useEffect(() => {
+  fetch("http://127.0.0.1:8000/ml-detect")
+    .then(res => res.json())
+    .then(result => {
+      console.log("ML Data:", result);
+      setData(result.result);   // this updates your dashboard data
+    })
+    .catch(err => console.log(err));
+}, []);
 
   // Simulated real-time data
   useEffect(() => {
