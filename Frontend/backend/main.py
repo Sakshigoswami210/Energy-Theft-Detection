@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
+from ai_model.model import run_model
 
 client = MongoClient("mongodb://localhost:27017/")
 db = client["energy_db"]
@@ -73,3 +74,8 @@ def detect(data: dict):
     collection.insert_one(result_data)   # ✅ store result
 
     return result_data
+
+@app.get("/ml-detect")
+def ml_detect():
+    data = run_model("ai_model/Real_data.xlsx")
+    return {"result": data}
